@@ -26,8 +26,11 @@ def extract_speaker_scripts(input_file, encoding='utf-8'):
 
     # Save each speaker's script to separate text files
     for speaker, script_lines in speaker_scripts.items():
-        with open(f"{speaker}.txt", 'w', encoding=encoding) as out_file:
+        with open(f"{input_file.split('/')[0]}/{input_file.split('/')[1]}/{speaker}.txt", 'w', encoding=encoding) as out_file:
             out_file.write('\n'.join(script_lines))
 
 if __name__ == "__main__":
-    extract_speaker_scripts("everything.vtt", encoding='utf-8')
+    import os
+    base_path = 'data'
+    for folder_path in os.listdir(base_path):
+        extract_speaker_scripts(f"{base_path}/{folder_path}/test.txt", encoding='utf-8')
